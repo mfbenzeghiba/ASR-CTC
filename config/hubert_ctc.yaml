@@ -1,0 +1,83 @@
+common:
+  base_exp_dir: 'C:/Users/Mohammed/my_work/pytorch/experiments/asr-ctc/'
+  use_cuda: True
+  phases: [train, valid]
+  nepochs: 40
+  seed: 3355
+
+datasets:
+  database: timit
+  train: 'C:/Users/Mohammed/my_work/data/timit/data/processed_train.csv'
+  valid: 'C:/Users/Mohammed/my_work/data/timit/data/processed_valid.csv'
+  test: 'C:/Users/Mohammed/my_work/data/timit/data/processed_test.csv'
+  char_vocab:  'C:/Users/Mohammed/my_work/data/timit/vocab_char.txt'
+  phone_mapping_file: 'C:/Users/Mohammed/my_work/data/timit/data/phones.60-48-39.map.txt'
+  modeling_unit: char # 'phoneme' or 'char'
+  mapping_key: 61to39
+  num_workers: 1
+  shuffle_train: True
+  batch_size: 8
+
+
+model:
+  name: hubert_timit_char_ctc
+  task: fine_tuning
+  type: hubert
+  from_pretrained: 'C:\Users\Mohammed\my_work\pytorch\speech\pretrained\hubert_base_ls960.pt'
+  from_checkpoint: null # for coninuous training
+  checkpoint_dir: checkpoints
+  feature_size: 768
+  num_labels: 29
+  encoder_layers: 12
+  freeze_finetune_updates: 0.0
+
+  processing:
+    name: Wav2VecProcessing
+    options: {
+      normalize: False
+    }
+
+  arg_overrides:
+    activation_dropout: 0.0
+    attention_dropout: 0.1
+    dropout: 0.1
+    dropout_features: 0.0
+    dropout_input: 0.
+    encoder_embed_dim: 768
+    feature_grad_mult: 0.0
+    encoder_layerdrop: 0.05
+    mask_channel_length: 64
+    mask_channel_other: 0
+    mask_channel_prob: 0.5
+    mask_channel_selection: static
+    mask_length: 10
+    mask_other: 0
+    mask_prob: 0.65
+    mask_selection: static      
+    no_mask_channel_overlap: False
+    no_mask_overlap: False
+    required_seq_len_multiple: 1
+  
+  arg_ctc:
+    final_dropout: 0.
+    num_labels: 29
+
+  learning_rate: 0.00003
+
+  optimizer:
+    name: Adam
+    options: {
+      eps: 1e-08,
+    }
+
+  scheduler:
+    name: LinearCosineAnnealingLR
+    options: {
+      lr: 0.00003,
+      warmup_steps: 4,
+      t_max: 36,
+    }
+  
+num_layers: ${model.encoder_layers}
+fu: ${model.freeze_finetune_updates}
+exp_dir: ${common.base_exp_dir}/${datasets.database}/${model.type}_v2/unit_${datasets.modeling_unit}/${num_layers}layers/freeze_updates_${fu}/bz${datasets.batch_size}/lr${model.learning_rate}/seed${common.seed}
