@@ -6,11 +6,11 @@ Initial experiments are performed on TIMIT databse, with the task of recognizing
 
 ## Evaluation
 
-The table belows reports the performance in terms of CER% (Character Error Rate) and WER (Word Error Rate) in End-to-End scenario (without language model).
+The table belows reports the performance in terms of CER(%) (Character Error Rate) and WER(%) (Word Error Rate) in End-to-End scenario (without language model).
 
 ## Dev data
 
-|       | CER (%)  |  WER |
+|       | CER  |  WER |
 |:------|--------:|--------:|
 | Wav2Vec2 | **6.8** | **25.9** |
 | Hubert  | 7.0 | 27.7 |
@@ -19,7 +19,7 @@ The table belows reports the performance in terms of CER% (Character Error Rate)
 
 ## Test data
 
-|       | CER (%)  |  WER |
+|       | CER  |  WER |
 |:------|--------:|--------:|
 | Wav2Vec2 | 7.2 | **26.9** |
 | Hubert  | 7.9 | 30.0 |
