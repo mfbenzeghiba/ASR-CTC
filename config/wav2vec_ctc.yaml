@@ -1,5 +1,5 @@
 common:
-  base_exp_dir: 'C:/Users/Mohammed/my_work/pytorch/experiments/asr-ctc/'
+  base_exp_dir: 'path/to/base/experiment/dir/'
   use_cuda: True
   phases: [train, valid]
   nepochs: 40
@@ -7,11 +7,11 @@ common:
 
 datasets:
   database: timit
-  train: 'C:/Users/Mohammed/my_work/data/timit/data/processed_train.csv'
-  valid: 'C:/Users/Mohammed/my_work/data/timit/data/processed_valid.csv'
-  test: 'C:/Users/Mohammed/my_work/data/timit/data/processed_test.csv'
-  char_vocab:  'C:/Users/Mohammed/my_work/data/timit/vocab_char.txt'
-  phone_mapping_file: 'C:/Users/Mohammed/my_work/data/timit/data/phones.60-48-39.map.txt'
+  train: 'path/to/processed_train.csv'
+  valid: 'path/to/processed_valid.csv'
+  test: 'path/to/processed_test.csv'
+  char_vocab:  'path/to/vocab_char.txt'
+  phone_mapping_file: 'path/to/data/phones.60-48-39.map.txt'
   modeling_unit: char # 'phoneme' or 'char'
   mapping_key: 61to39
   num_workers: 1
@@ -23,7 +23,7 @@ model:
   name: wav2vec_timit_char_ctc
   task: fine_tuning
   type: wav2vec
-  from_pretrained: 'C:\Users\Mohammed\my_work\pytorch\speech\pretrained\wav2vec_small.pt'
+  from_pretrained: 'path/to/pretrained\wav2vec_small.pt'
   from_checkpoint: null # for coninuous training
   checkpoint_dir: checkpoints
   feature_size: 768
