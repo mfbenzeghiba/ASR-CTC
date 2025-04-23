@@ -2,9 +2,11 @@
 This repos uses PyTorch to fine-tune state-of-the-art pretrained foundational ASR models, including Wav2Vec2.0, Hubert and WavLM.
 The fine tuning is done by adding a linear CTC layer at the output of the pretrained models, and finetuning the original encoder
 with the added CTC layer. The feature extraction backbone is kept as it is (without finetuning it).
-Initial experiments are performed on TIMIT databse, with the task of recognizing characters.
+
 
 ## Evaluation
+
+Initial experiments are performed on TIMIT databse, with the task of recognizing characters.
 
 The table belows reports the performance in terms of CER(%) (Character Error Rate) and WER(%) (Word Error Rate) in End-to-End scenario (without language model).
 
